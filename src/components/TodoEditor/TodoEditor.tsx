@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Box, TextField, Button, InputAdornment } from "@mui/material";
 import AddTaskIcon from "@mui/icons-material/AddTask";
+import { useDispatch } from "react-redux";
+import { addTodo } from "../../redux/todos/actions";
 
-interface Props {
-  addTodo(text: string): void;
-}
+const TodoEditor = () => {
+  const dispatch = useDispatch();
 
-const TodoEditor = ({ addTodo }: Props) => {
   const [text, setText] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -15,7 +15,8 @@ const TodoEditor = ({ addTodo }: Props) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    addTodo(text);
+    if (text === "") return;
+    dispatch(addTodo(text));
     setText("");
   };
 

@@ -10,28 +10,28 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import Checkbox from "@mui/material/Checkbox";
 import styles from "./TodoListItem.module.css";
 import TextField from "@mui/material/TextField";
-import ITodo from "../../interfaces/todo.interface";
+import { ITodo } from "../../interfaces/interfaces";
+import { useDispatch } from "react-redux";
+import {
+  editTodo,
+  deleteTodo,
+  toggleCompleted,
+} from "../../redux/todos/actions";
 
 interface IProps {
   todo: ITodo;
-  toggleTodo: (id: string) => void;
-  editTodo: (id: string, text: string) => void;
-  deleteTodo: (id: string) => void;
 }
 
-const TodoListItem = ({
-  todo: { id, text, isCompleted },
-  toggleTodo,
-  editTodo,
-  deleteTodo,
-}: IProps) => {
+const TodoListItem = ({ todo: { id, text, isCompleted } }: IProps) => {
+  const dispatch = useDispatch();
+
   const [isEditing, setIsEditing] = useState(false);
   const [todoText, setTodoText] = useState(text);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    dispatch(editTodo(id, todoText));
     setIsEditing(false);
-    editTodo(e.currentTarget.dataset.id!, todoText);
   };
 
   return (
@@ -48,7 +48,7 @@ const TodoListItem = ({
           <IconButton
             className={styles.IconButton}
             data-id={id}
-            onClick={(e) => deleteTodo(e.currentTarget.dataset.id!)}
+            onClick={() => dispatch(deleteTodo(id))}
             aria-label="delete"
           >
             <DeleteIcon />
@@ -57,7 +57,7 @@ const TodoListItem = ({
       }
     >
       {isEditing ? (
-        <form onSubmit={handleSubmit} data-id={id}>
+        <form onSubmit={handleSubmit}>
           <TextField
             label="Edit todo text, please"
             value={todoText}
@@ -67,8 +67,8 @@ const TodoListItem = ({
       ) : (
         <ListItemButton
           role={undefined}
-          id={id}
-          onClick={(e) => toggleTodo(e.currentTarget.id)}
+          // id={id}
+          onClick={() => dispatch(toggleCompleted(id))}
         >
           <ListItemIcon>
             <Checkbox checked={isCompleted} />

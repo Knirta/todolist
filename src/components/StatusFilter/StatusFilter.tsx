@@ -1,20 +1,26 @@
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import ToggleButton from "@mui/material/ToggleButton";
-import { statusFilterConst } from "../../constants/constants";
+import { useSelector, useDispatch } from "react-redux";
+import { getStatusFilter } from "../../redux/filter/selectors";
+import { statusFilterConst } from "../../redux/filter/constants";
+import { setStatusFilter } from "../../redux/filter/actions";
 
-interface IProps {
-  statusFilter: string;
-  handleStatusFilter: (
-    e: React.MouseEvent<HTMLElement>,
-    newStatus: string
-  ) => void;
-}
+const StatusFilter = () => {
+  const dispatch = useDispatch();
 
-const StatusFilter = ({ statusFilter, handleStatusFilter }: IProps) => {
+  const statusFilter = useSelector(getStatusFilter);
+
+  const handleChange = (
+    event: React.MouseEvent<HTMLElement>,
+    filter: string
+  ) => {
+    dispatch(setStatusFilter(filter));
+  };
+
   return (
     <ToggleButtonGroup
       value={statusFilter}
-      onChange={handleStatusFilter}
+      onChange={handleChange}
       exclusive
       aria-label="status filter"
     >

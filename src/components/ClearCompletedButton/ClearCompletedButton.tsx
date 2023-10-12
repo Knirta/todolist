@@ -1,11 +1,14 @@
 import Button from "@mui/material/Button";
+import { useDispatch } from "react-redux";
+import { deleteCompletedTodos } from "../../redux/todos/actions";
 
-interface IProps {
-  deleteCompletedTodos: () => void;
-}
-
-const ClearCompletedButton = ({ deleteCompletedTodos }: IProps) => (
-  <Button onClick={deleteCompletedTodos}>Clear Completed</Button>
-);
+const ClearCompletedButton = () => {
+  const dispatch = useDispatch();
+  return (
+    <Button onClick={() => dispatch(deleteCompletedTodos())}>
+      Clear Completed
+    </Button>
+  );
+};
 
 export default ClearCompletedButton;
