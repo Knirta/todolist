@@ -3,7 +3,7 @@ import ToggleButton from "@mui/material/ToggleButton";
 import { useSelector, useDispatch } from "react-redux";
 import { getStatusFilter } from "../../redux/filters/selectors";
 import { statusFilterConst } from "../../redux/filters/constants";
-import { setStatusFilter } from "../../redux/filters/actions";
+import { setStatusFilter } from "../../redux/filters/slice";
 
 const StatusFilter = () => {
   const dispatch = useDispatch();

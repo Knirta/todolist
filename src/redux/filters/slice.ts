@@ -1,7 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { statusFilterConst } from "./constants";
 
-const filtersInitialState = {
+type filterStatusType =
+  (typeof statusFilterConst)[keyof typeof statusFilterConst];
+
+interface IFilterstate {
+  status: filterStatusType;
+  text: string;
+}
+
+const filtersInitialState: IFilterstate = {
   status: statusFilterConst.all,
   text: "",
 };

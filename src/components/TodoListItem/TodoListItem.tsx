@@ -12,11 +12,7 @@ import styles from "./TodoListItem.module.css";
 import TextField from "@mui/material/TextField";
 import { ITodo } from "../../interfaces/interfaces";
 import { useDispatch } from "react-redux";
-import {
-  editTodo,
-  deleteTodo,
-  toggleCompleted,
-} from "../../redux/todos/actions";
+import { editTodo, deleteTodo, toggleCompleted } from "../../redux/todos/slice";
 
 interface IProps {
   todo: ITodo;

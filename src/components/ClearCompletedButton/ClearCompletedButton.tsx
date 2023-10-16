@@ -1,6 +1,6 @@
 import Button from "@mui/material/Button";
 import { useDispatch } from "react-redux";
-import { deleteCompletedTodos } from "../../redux/todos/actions";
+import { deleteCompletedTodos } from "../../redux/todos/slice";
 
 const ClearCompletedButton = () => {
   const dispatch = useDispatch();

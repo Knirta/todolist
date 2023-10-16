@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Box, TextField, Button, InputAdornment } from "@mui/material";
 import AddTaskIcon from "@mui/icons-material/AddTask";
 import { useDispatch } from "react-redux";
-import { addTodo } from "../../redux/todos/actions";
+import { addTodo } from "../../redux/todos/slice";
 
 const TodoEditor = () => {
   const dispatch = useDispatch();
