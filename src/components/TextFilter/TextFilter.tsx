@@ -1,7 +1,7 @@
 import TextField from "@mui/material/TextField";
 import { useSelector, useDispatch } from "react-redux";
-import { getTextFilter } from "../../redux/filter/selectors";
-import { setTextFilter } from "../../redux/filter/actions";
+import { getTextFilter } from "../../redux/filters/selectors";
+import { setTextFilter } from "../../redux/filters/actions";
 
 const TextFilter = () => {
   const dispatch = useDispatch();

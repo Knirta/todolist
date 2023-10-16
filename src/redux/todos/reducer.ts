@@ -1,3 +1,14 @@
+import { createReducer } from "@reduxjs/toolkit";
+import { ITodo } from "../../interfaces/interfaces";
+
+import {
+  addTodo,
+  editTodo,
+  deleteTodo,
+  toggleCompleted,
+  deleteCompletedTodos,
+} from "./actions";
+
 enum ActionTypes {
   add = "todos/addTodo",
   toggle = "todos/toggleCompleted",
@@ -8,7 +19,7 @@ enum ActionTypes {
 
 interface IActionAdd {
   type: ActionTypes.add;
-  payload: { id: string; text: string; isComplete: boolean };
+  payload: { id: string; text: string; isCompleted: boolean };
 }
 
 interface IActionToggle {
@@ -26,18 +37,6 @@ interface IActionDelete {
   payload: string;
 }
 
-interface IActionDeleteCompleted {
-  type: ActionTypes.deleteAll;
-  payload?: unknown;
-}
-
-type IAction =
-  | IActionAdd
-  | IActionToggle
-  | IActionEdit
-  | IActionDelete
-  | IActionDeleteCompleted;
-
 const todosInitialState = [
   { id: "sdfsdfs", text: "make a web site", isCompleted: false },
   { id: "sdfsss", text: "go to bed", isCompleted: true },
@@ -53,30 +52,32 @@ const todosInitialState = [
   { id: "svcrrxvsdbfs", text: "watch TV with friend", isCompleted: false },
 ];
 
-export const todosReducer = (
-  state = todosInitialState,
-  { type, payload }: IAction
-) => {
-  switch (type) {
-    case "todos/addTodo":
-      return [payload, ...state];
-    case "todos/toggleCompleted":
-      return state.map((todo) => {
-        if (todo.id === payload) {
-          todo.isCompleted = !todo.isCompleted;
-        }
-        return todo;
-      });
-    case "todos/editTodo": {
-      const index = state.findIndex((todo) => todo.id === payload.id);
-      state[index].text = payload.text;
-      return [...state];
+export const todosReducer = createReducer(todosInitialState, {
+  [addTodo.type]: (state, action: IActionAdd): ITodo[] => [
+    action.payload,
+    ...state,
+  ],
+  [editTodo.type]: (state, action: IActionEdit): void => {
+    for (const todo of state) {
+      if (todo.id === action.payload.id) {
+        todo.text = action.payload.text;
+        break;
+      }
     }
-    case "todos/deleteTodo":
-      return state.filter((todo) => todo.id !== payload);
-    case "todos/deleteCompletedTodos":
-      return state.filter((todo) => todo.isCompleted === false);
-    default:
-      return state;
-  }
-};
+  },
+  [deleteTodo.type]: (state, action: IActionDelete): void => {
+    const idx = state.findIndex((todo) => todo.id === action.payload);
+    state.splice(idx, 1);
+  },
+  [toggleCompleted.type]: (state, action: IActionToggle): void => {
+    for (const todo of state) {
+      if (todo.id === action.payload) {
+        todo.isCompleted = !todo.isCompleted;
+        break;
+      }
+    }
+  },
+  [deleteCompletedTodos.type]: (state): ITodo[] => {
+    return state.filter((todo) => todo.isCompleted === false);
+  },
+});

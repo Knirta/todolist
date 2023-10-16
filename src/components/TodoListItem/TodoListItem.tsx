@@ -30,7 +30,7 @@ const TodoListItem = ({ todo: { id, text, isCompleted } }: IProps) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(editTodo(id, todoText));
+    dispatch(editTodo({ id, text: todoText }));
     setIsEditing(false);
   };
 

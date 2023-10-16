@@ -4,9 +4,9 @@ import TodoListItem from "../TodoListItem";
 import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux";
 import { getTodos } from "../../redux/todos/selectors";
-import { getStatusFilter, getTextFilter } from "../../redux/filter/selectors";
+import { getStatusFilter, getTextFilter } from "../../redux/filters/selectors";
 import { ITodo } from "../../interfaces/interfaces";
-import { statusFilterConst } from "../../redux/filter/constants";
+import { statusFilterConst } from "../../redux/filters/constants";
 
 const filterTodosByStatus = (todos: ITodo[], statusFilter: string) => {
   switch (statusFilter) {
@@ -40,7 +40,7 @@ const TodoList = () => {
   const visibleTodos: ITodo[] = getVisisbleTodos(todos);
 
   return (
-    <Box sx={{ backgroundColor: "#fff"}}>
+    <Box sx={{ backgroundColor: "#fff" }}>
       <List sx={{ width: "100%", maxWidth: 900 }}>
         {visibleTodos.length > 0 ? (
           visibleTodos.map((todo) => <TodoListItem key={todo.id} todo={todo} />)

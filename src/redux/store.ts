@@ -1,14 +1,14 @@
-import { createStore } from "redux";
-import { devToolsEnhancer } from "@redux-devtools/extension";
-import { todosReducer } from "./todos/reducer";
-import { filtersReducer } from "./filter/reducer";
-import { combineReducers } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
+import { todosReducer } from "./todos/slice";
+import { filtersReducer } from "./filters/slice";
 
-const rootReducer = combineReducers({
-  todos: todosReducer,
-  filters: filtersReducer,
+export const store = configureStore({
+  reducer: {
+    todos: todosReducer,
+    filters: filtersReducer,
+  },
 });
 
-const enhancer = devToolsEnhancer();
+export type RootState = ReturnType<typeof store.getState>;
 
-export const store = createStore(rootReducer, enhancer);
+export type AppDispatch = typeof store.dispatch;
