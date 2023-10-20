@@ -7,7 +7,7 @@ import ClearCompletedButton from "../../components/ClearCompletedButton";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useSelector } from "react-redux";
-import { getTodos } from "../../redux/todos/selectors";
+import { getTodos } from "../../redux/todos/slice";
 
 const TodosPage = () => {
   const todos = useSelector(getTodos);

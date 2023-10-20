@@ -1,7 +1,7 @@
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import ToggleButton from "@mui/material/ToggleButton";
 import { useSelector, useDispatch } from "react-redux";
-import { getStatusFilter } from "../../redux/filters/selectors";
+import { getStatusFilter } from "../../redux/filters/slice";
 import { statusFilterConst } from "../../redux/filters/constants";
 import { setStatusFilter } from "../../redux/filters/slice";
 

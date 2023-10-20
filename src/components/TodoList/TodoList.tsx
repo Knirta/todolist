@@ -3,8 +3,8 @@ import List from "@mui/material/List";
 import TodoListItem from "../TodoListItem";
 import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux";
-import { getTodos } from "../../redux/todos/selectors";
-import { getStatusFilter, getTextFilter } from "../../redux/filters/selectors";
+import { getTodos } from "../../redux/todos/slice";
+import { getStatusFilter, getTextFilter } from "../../redux/filters/slice";
 import { ITodo } from "../../interfaces/interfaces";
 import { statusFilterConst } from "../../redux/filters/constants";
 
