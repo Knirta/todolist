@@ -10,16 +10,20 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import Checkbox from "@mui/material/Checkbox";
 import styles from "./TodoListItem.module.css";
 import TextField from "@mui/material/TextField";
-import { ITodo } from "../../interfaces/interfaces";
-import { useDispatch } from "react-redux";
-import { editTodo, deleteTodo, toggleCompleted } from "../../redux/todos/slice";
+import type { ITodo } from "../../interfaces/interfaces";
+import { useAppDispatch } from "../../hooks/hooks";
+import {
+  deleteTodo,
+  toggleCompleted,
+  editTodo,
+} from "../../redux/todos/operations";
 
 interface IProps {
   todo: ITodo;
 }
 
-const TodoListItem = ({ todo: { id, text, isCompleted } }: IProps) => {
-  const dispatch = useDispatch();
+const TodoListItem = ({ todo: { id, text, completed } }: IProps) => {
+  const dispatch = useAppDispatch();
 
   const [isEditing, setIsEditing] = useState(false);
   const [todoText, setTodoText] = useState(text);
@@ -63,15 +67,15 @@ const TodoListItem = ({ todo: { id, text, isCompleted } }: IProps) => {
       ) : (
         <ListItemButton
           role={undefined}
-          // id={id}
-          onClick={() => dispatch(toggleCompleted(id))}
+          id={id}
+          onClick={() => dispatch(toggleCompleted({ id, completed }))}
         >
           <ListItemIcon>
-            <Checkbox checked={isCompleted} />
+            <Checkbox checked={completed} />
           </ListItemIcon>
 
           <ListItemText>
-            {isCompleted ? <del>{todoText}</del> : todoText}
+            {completed ? <del>{todoText}</del> : todoText}
           </ListItemText>
         </ListItemButton>
       )}

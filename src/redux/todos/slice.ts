@@ -1,66 +1,90 @@
-import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
-import { ITodo, IState } from "../../interfaces/interfaces";
-import { nanoid } from "nanoid";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { ITodo } from "../../interfaces/interfaces";
+import {
+  fetchTodos,
+  addTodo,
+  deleteTodo,
+  toggleCompleted,
+  editTodo,
+} from "./operations";
 
-type TodosState = ITodo[];
+interface ITodosState {
+  items: ITodo[];
+  error: string | null;
+  isLoading: boolean;
+}
 
-const todosInitialState: TodosState = [];
+const todosInitialState: ITodosState = {
+  items: [],
+  error: null,
+  isLoading: false,
+};
+
+const handlePending = (state: ITodosState) => {
+  state.isLoading = true;
+};
+
+const handleRejected = (
+  state: ITodosState,
+  action: PayloadAction<unknown, string>
+) => {
+  state.error = action.payload as string;
+  state.isLoading = false;
+};
 
 const todosSlice = createSlice({
   name: "todos",
   initialState: todosInitialState,
-  reducers: {
-    addTodo: {
-      reducer(state, action: PayloadAction<ITodo>) {
-        return [action.payload, ...state];
-      },
-      prepare(text: string) {
-        return {
-          payload: {
-            id: nanoid(),
-            text,
-            isCompleted: false,
-          },
-        };
-      },
-    },
-    editTodo(state, action: PayloadAction<{ id: string; text: string }>) {
-      for (const todo of state) {
-        if (todo.id === action.payload.id) {
-          todo.text = action.payload.text;
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchTodos.pending, handlePending)
+      .addCase(fetchTodos.fulfilled, (state, action) => {
+        state.items = action.payload;
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(fetchTodos.rejected, handleRejected)
+      .addCase(addTodo.pending, handlePending)
+      .addCase(addTodo.fulfilled, (state, action) => {
+        state.items.unshift(action.payload);
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(addTodo.rejected, handleRejected)
+      .addCase(editTodo.pending, handlePending)
+      .addCase(editTodo.fulfilled, (state, action) => {
+        for (const todo of state.items) {
+          if (todo.id === action.payload.id) {
+            todo.text = action.payload.text;
+          }
           break;
         }
-      }
-    },
-    deleteTodo(state, action: PayloadAction<string>) {
-      const index = state.findIndex((todo) => todo.id === action.payload);
-      state.splice(index, 1);
-    },
-    toggleCompleted(state, action: PayloadAction<string>) {
-      for (const todo of state) {
-        if (todo.id === action.payload) {
-          todo.isCompleted = !todo.isCompleted;
-          break;
-        }
-      }
-    },
-    deleteCompletedTodos(state) {
-      return state.filter((todo) => todo.isCompleted === false);
-    },
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(editTodo.rejected, handleRejected)
+      .addCase(deleteTodo.pending, handlePending)
+      .addCase(deleteTodo.fulfilled, (state, action) => {
+        const idx = state.items.findIndex(
+          (item) => item.id === action.payload.id
+        );
+        state.items.splice(idx, 1);
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(deleteTodo.rejected, handleRejected)
+      .addCase(toggleCompleted.pending, handlePending)
+      .addCase(toggleCompleted.fulfilled, (state, action) => {
+        const idx = state.items.findIndex(
+          (todo) => todo.id === action.payload.id
+        );
+        state.items.splice(idx, 1, action.payload);
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(toggleCompleted.rejected, handleRejected);
   },
 });
 
 export const todosReducer = todosSlice.reducer;
-
-export const {
-  addTodo,
-  editTodo,
-  deleteTodo,
-  toggleCompleted,
-  deleteCompletedTodos,
-} = todosSlice.actions;
-
-export const getTodos = (state: IState) => {
-  return state.todos;
-};

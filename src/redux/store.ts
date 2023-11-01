@@ -15,9 +15,9 @@ import storage from "redux-persist/lib/storage";
 import { combineReducers } from "redux";
 
 const persistConfig = {
-  key: "todos",
+  key: "root",
   storage,
-  blacklist: ["filters"],
+  blacklist: ["todos"],
 };
 
 const rootReducer = combineReducers({

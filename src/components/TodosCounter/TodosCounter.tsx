@@ -1,14 +1,14 @@
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useSelector } from "react-redux";
-import { getTodos } from "../../redux/todos/slice";
+import { getTodos } from "../../redux/todos/selectors";
 
 const TodosCounter = () => {
   const todos = useSelector(getTodos);
 
-  const count = todos.reduce(
+  const count = todos.items.reduce(
     (acc, todo) => {
-      if (todo.isCompleted) {
+      if (todo.completed) {
         acc.completed += 1;
       } else {
         acc.active += 1;

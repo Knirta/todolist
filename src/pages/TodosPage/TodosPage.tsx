@@ -1,20 +1,32 @@
+import { useEffect } from "react";
 import TodoEditor from "../../components/TodoEditor";
 import TextFilter from "../../components/TextFilter";
 import StatusFilter from "../../components/StatusFilter";
 import TodoList from "../../components/TodoList";
 import TodosCounter from "../../components/TodosCounter";
-import ClearCompletedButton from "../../components/ClearCompletedButton";
+// import ClearCompletedButton from "../../components/ClearCompletedButton";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import { useSelector } from "react-redux";
-import { getTodos } from "../../redux/todos/slice";
+import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
+import { getTodos } from "../../redux/todos/selectors";
+import { fetchTodos } from "../../redux/todos/operations";
 
 const TodosPage = () => {
-  const todos = useSelector(getTodos);
+  const { items: todos, isLoading, error } = useAppSelector(getTodos);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchTodos());
+  }, [dispatch]);
 
   return (
     <>
       <TodoEditor />
+      {isLoading && !error && todos.length == 0 && (
+        <p>Request in progress...</p>
+      )}
+      {error && "error"}
       {todos.length > 0 ? (
         <>
           <TextFilter />
@@ -32,7 +44,7 @@ const TodosPage = () => {
           >
             <TodosCounter />
             <StatusFilter />
-            <ClearCompletedButton />
+            {/* <ClearCompletedButton /> */}
           </Box>
         </>
       ) : (
