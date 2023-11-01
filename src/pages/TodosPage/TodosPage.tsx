@@ -8,11 +8,17 @@ import TodosCounter from "../../components/TodosCounter";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
-import { getTodos } from "../../redux/todos/selectors";
+import {
+  selectError,
+  selectIsLoading,
+  selectTodos,
+} from "../../redux/todos/selectors";
 import { fetchTodos } from "../../redux/todos/operations";
 
 const TodosPage = () => {
-  const { items: todos, isLoading, error } = useAppSelector(getTodos);
+  const todos = useAppSelector(selectTodos);
+  const isLoading = useAppSelector(selectIsLoading);
+  const error = useAppSelector(selectError);
 
   const dispatch = useAppDispatch();
 

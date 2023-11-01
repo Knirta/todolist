@@ -1,22 +1,10 @@
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import { useSelector } from "react-redux";
-import { getTodos } from "../../redux/todos/selectors";
+import { useAppSelector } from "../../hooks/hooks";
+import { selectCount } from "../../redux/todos/selectors";
 
 const TodosCounter = () => {
-  const todos = useSelector(getTodos);
-
-  const count = todos.items.reduce(
-    (acc, todo) => {
-      if (todo.completed) {
-        acc.completed += 1;
-      } else {
-        acc.active += 1;
-      }
-      return acc;
-    },
-    { active: 0, completed: 0 }
-  );
+  const count = useAppSelector(selectCount);
 
   return (
     <Box>
