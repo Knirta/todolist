@@ -9,26 +9,26 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
+import { authReducer } from "./auth/slice";
 import { todosReducer } from "./todos/slice";
 import { filtersReducer } from "./filters/slice";
 import storage from "redux-persist/lib/storage";
 import { combineReducers } from "redux";
 
 const persistConfig = {
-  key: "root",
+  key: "auth",
   storage,
-  blacklist: ["todos"],
+  whitelist: ["token"],
 };
 
 const rootReducer = combineReducers({
+  auth: persistReducer(persistConfig, authReducer),
   todos: todosReducer,
   filters: filtersReducer,
 });
 
-const persistedRootReducer = persistReducer(persistConfig, rootReducer);
-
 export const store = configureStore({
-  reducer: persistedRootReducer,
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

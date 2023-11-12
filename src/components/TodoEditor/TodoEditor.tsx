@@ -24,7 +24,7 @@ const TodoEditor = () => {
     <Box
       component="form"
       onSubmit={handleSubmit}
-      sx={{ backgroundColor: "#fff", width: "100%" }}
+      sx={{ backgroundColor: "#fff", width: "100%", mt: 15 }}
     >
       <TextField
         variant="standard"
@@ -39,7 +39,9 @@ const TodoEditor = () => {
           ),
         }}
       />
-      <Button type="submit">Add</Button>
+      <Button type="submit" variant="contained" color="primary">
+        Add
+      </Button>
     </Box>
   );
 };

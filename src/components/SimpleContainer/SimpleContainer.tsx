@@ -6,7 +6,11 @@ interface Props {
 }
 
 const SimpleContainer = ({ children }: Props) => {
-  return <Container maxWidth="xl">{children}</Container>;
+  return (
+    <Container maxWidth="lg" sx={{ pt: 9 }}>
+      {children}
+    </Container>
+  );
 };
 
 export default SimpleContainer;

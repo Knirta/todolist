@@ -44,7 +44,8 @@ const TodosPage = () => {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "flex-end",
-              backgroundColor: "#fff",
+              background: "none",
+              backdropFilter: "blur(6px) brightness(0.85)",
               py: 3,
             }}
           >

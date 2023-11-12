@@ -1,6 +1,9 @@
-body {
+html {
   font-size: 16px;
-  background-image: url("./images/background.jpg");
-  background-size: auto 35vh;
-  background-repeat: repeat-x;
+}
+
+#root {
+  min-height: 100vh;
+  background: url("./images/bg-958.jpg") top left / auto 450px repeat-x,
+    linear-gradient(#e2a76b 450px, transparent 450px 100%);
 }

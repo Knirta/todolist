@@ -7,6 +7,7 @@ import {
   toggleCompleted,
   editTodo,
 } from "./operations";
+import { logOut } from "../auth/operations";
 
 interface ITodosState {
   items: ITodo[];
@@ -47,7 +48,7 @@ const todosSlice = createSlice({
       .addCase(fetchTodos.rejected, handleRejected)
       .addCase(addTodo.pending, handlePending)
       .addCase(addTodo.fulfilled, (state, action) => {
-        state.items.unshift(action.payload);
+        state.items.push(action.payload);
         state.isLoading = false;
         state.error = null;
       })
@@ -83,7 +84,12 @@ const todosSlice = createSlice({
         state.isLoading = false;
         state.error = null;
       })
-      .addCase(toggleCompleted.rejected, handleRejected);
+      .addCase(toggleCompleted.rejected, handleRejected)
+      .addCase(logOut.fulfilled, (state) => {
+        state.items = [];
+        state.error = null;
+        state.isLoading = false;
+      });
   },
 });
 

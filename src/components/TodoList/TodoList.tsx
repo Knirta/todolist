@@ -18,7 +18,9 @@ const TodoList = () => {
   const visibleTodos = useAppSelector(selectVisibleTodos);
 
   return (
-    <Box sx={{ backgroundColor: "#fff" }}>
+    <Box
+      sx={{ background: "none", backdropFilter: "blur(6px) brightness(0.85)" }}
+    >
       {isLoading && todos.length > 0 && <p>Waiting...</p>}
       <List sx={{ width: "100%", maxWidth: 900 }}>
         {visibleTodos.length > 0 ? (
