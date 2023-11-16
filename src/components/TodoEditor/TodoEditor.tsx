@@ -24,22 +24,34 @@ const TodoEditor = () => {
     <Box
       component="form"
       onSubmit={handleSubmit}
-      sx={{ backgroundColor: "#fff", width: "100%", mt: 15 }}
+      sx={{
+        display: "flex",
+        justifyContent: "space-between",
+        width: "100%",
+        my: 6,
+        p: 1,
+        borderRadius: 1,
+        backgroundColor: "#fff",
+        boxShadow:
+          "0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
+      }}
     >
       <TextField
-        variant="standard"
+        variant="outlined"
         value={text}
+        placeholder="write todo..."
         onChange={handleChange}
         size="medium"
+        sx={{ flexGrow: 1, mr: 1 }}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <AddTaskIcon />
+              <AddTaskIcon color="primary" />
             </InputAdornment>
           ),
         }}
       />
-      <Button type="submit" variant="contained" color="primary">
+      <Button type="submit" variant="contained" color="primary" sx={{ px: 9 }}>
         Add
       </Button>
     </Box>

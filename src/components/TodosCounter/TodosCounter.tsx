@@ -7,11 +7,11 @@ const TodosCounter = () => {
   const count = useAppSelector(selectCount);
 
   return (
-    <Box>
-      <Typography variant="subtitle1" sx={{ lineHeight: 1.2 }}>
+    <Box sx={{ mb: { xs: 2, sm: 0 } }}>
+      <Typography variant="subtitle2" sx={{ lineHeight: 1.2 }}>
         {count.active} left
       </Typography>
-      <Typography variant="subtitle1" sx={{ lineHeight: 1.2 }}>
+      <Typography variant="subtitle2" sx={{ lineHeight: 1.2 }}>
         {count.completed} completed
       </Typography>
     </Box>

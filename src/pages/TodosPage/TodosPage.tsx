@@ -7,6 +7,8 @@ import TodosCounter from "../../components/TodosCounter";
 // import ClearCompletedButton from "../../components/ClearCompletedButton";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import CircularProgress from "@mui/material/CircularProgress";
 import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
 import {
   selectError,
@@ -29,33 +31,40 @@ const TodosPage = () => {
   return (
     <>
       <TodoEditor />
-      {isLoading && !error && todos.length == 0 && (
-        <p>Request in progress...</p>
+      {isLoading && !error && todos.length === 0 && (
+        <Box sx={{ display: "flex", justifyContent: "center", pt: 15 }}>
+          <CircularProgress sx={{ color: "#fff" }} size={80} thickness={5} />
+        </Box>
       )}
-      {error && "error"}
+      {/* {error && <Typography color="red">error</Typography>} */}
       {todos.length > 0 ? (
         <>
-          <TextFilter />
-          <TodoList />
-          <Box
-            sx={{
-              position: "sticky",
-              bottom: 0,
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "flex-end",
-              background: "none",
-              backdropFilter: "blur(6px) brightness(0.85)",
-              py: 3,
-            }}
-          >
-            <TodosCounter />
-            <StatusFilter />
-            {/* <ClearCompletedButton /> */}
-          </Box>
+          <Paper elevation={7} sx={{ p: 1 }}>
+            <TextFilter />
+            <TodoList />
+
+            <Box
+              sx={{
+                display: { xs: "block", sm: "flex" },
+                justifyContent: "space-between",
+                alignItems: "flex-end",
+                position: "sticky",
+                bottom: 0,
+                px: 2,
+                py: 3,
+                backgroundColor: "#fff",
+              }}
+            >
+              <TodosCounter />
+              <StatusFilter />
+              {/* <ClearCompletedButton /> */}
+            </Box>
+          </Paper>
         </>
       ) : (
-        <Typography variant="subtitle1">Your future plans...</Typography>
+        <Typography variant="h6" color="#fff">
+          Your future plans...
+        </Typography>
       )}
     </>
   );

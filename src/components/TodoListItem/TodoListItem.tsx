@@ -3,12 +3,11 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import DeleteIcon from "@mui/icons-material/Delete";
+import ClearIcon from "@mui/icons-material/Clear";
 import EditIcon from "@mui/icons-material/Edit";
 import IconButton from "@mui/material/IconButton";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Checkbox from "@mui/material/Checkbox";
-import styles from "./TodoListItem.module.css";
 import TextField from "@mui/material/TextField";
 import type { ITodo } from "../../interfaces/interfaces";
 import { useAppDispatch } from "../../hooks/hooks";
@@ -17,6 +16,7 @@ import {
   toggleCompleted,
   editTodo,
 } from "../../redux/todos/operations";
+import { Typography } from "@mui/material";
 
 interface IProps {
   todo: ITodo;
@@ -36,32 +36,29 @@ const TodoListItem = ({ todo: { id, text, completed } }: IProps) => {
 
   return (
     <ListItem
+      sx={{ pr: 2 }}
       secondaryAction={
         <ButtonGroup>
-          <IconButton
-            className={styles.IconButton}
-            onClick={() => setIsEditing(true)}
-            aria-label="edit"
-          >
-            <EditIcon />
+          <IconButton onClick={() => setIsEditing(true)} aria-label="edit">
+            <EditIcon color="primary" />
           </IconButton>
           <IconButton
-            className={styles.IconButton}
             data-id={id}
             onClick={() => dispatch(deleteTodo(id))}
             aria-label="delete"
           >
-            <DeleteIcon />
+            <ClearIcon color="primary" />
           </IconButton>
         </ButtonGroup>
       }
     >
       {isEditing ? (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} style={{ width: "85%" }}>
           <TextField
             label="Edit todo text, please"
             value={todoText}
             onChange={(e) => setTodoText(e.target.value)}
+            sx={{ width: { xs: "85%", sm: "100%" } }}
           />
         </form>
       ) : (
@@ -74,8 +71,10 @@ const TodoListItem = ({ todo: { id, text, completed } }: IProps) => {
             <Checkbox checked={completed} />
           </ListItemIcon>
 
-          <ListItemText>
-            {completed ? <del>{todoText}</del> : todoText}
+          <ListItemText sx={{ pr: 12 }}>
+            <Typography noWrap>
+              {completed ? <del>{todoText}</del> : todoText}
+            </Typography>
           </ListItemText>
         </ListItemButton>
       )}

@@ -26,7 +26,12 @@ function ResponsiveAppBar() {
   return (
     <AppBar position="static" sx={{ fontSize: "2rem", py: 2 }}>
       <Toolbar disableGutters>
-        <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+        <Box
+          sx={{
+            flexGrow: 1,
+            display: { xs: "flex", md: "none" },
+          }}
+        >
           <IconButton
             size="large"
             aria-label="account of current user"
@@ -52,7 +57,7 @@ function ResponsiveAppBar() {
             open={Boolean(anchorElNav)}
             onClose={handleCloseNavMenu}
             sx={{
-              display: { xs: "block", md: "none" },
+              display: { xs: "block", md: "none" }
             }}
           >
             <NavMenu handleCloseNavMenu={handleCloseNavMenu} />

@@ -28,7 +28,7 @@ const RegisterPage = () => {
 
   return (
     <Paper
-      elevation={5}
+      elevation={7}
       sx={{ margin: "125px auto 55px", width: "75%", p: "55px" }}
     >
       <form autoComplete="off" onSubmit={handleSubmit}>

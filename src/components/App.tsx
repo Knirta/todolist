@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import Layout from "./Layout";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 import HomePage from "../pages/HomePage";
 import TodosPage from "../pages/TodosPage";
 import RegisterPage from "../pages/RegisterPage";
@@ -18,7 +20,9 @@ const App = () => {
   }, [dispatch]);
 
   return isRefreshing ? (
-    <b>Refreshing user...</b>
+    <Box sx={{ display: "flex", justifyContent: "center", pt: 15 }}>
+      <CircularProgress sx={{ color: "#fff" }} size={80} thickness={5} />
+    </Box>
   ) : (
     <Routes>
       <Route path="/" element={<Layout />}>

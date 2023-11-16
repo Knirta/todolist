@@ -4,6 +4,7 @@ html {
 
 #root {
   min-height: 100vh;
+  min-width: 300px;
   background: url("./images/bg-958.jpg") top left / auto 450px repeat-x,
     linear-gradient(#e2a76b 450px, transparent 450px 100%);
 }

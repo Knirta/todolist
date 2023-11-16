@@ -2,6 +2,7 @@ import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import TodoListItem from "../TodoListItem";
 import Typography from "@mui/material/Typography";
+import CircularProgress from "@mui/material/CircularProgress";
 import { useAppSelector } from "../../hooks/hooks";
 import {
   selectTodos,
@@ -18,15 +19,17 @@ const TodoList = () => {
   const visibleTodos = useAppSelector(selectVisibleTodos);
 
   return (
-    <Box
-      sx={{ background: "none", backdropFilter: "blur(6px) brightness(0.85)" }}
-    >
-      {isLoading && todos.length > 0 && <p>Waiting...</p>}
-      <List sx={{ width: "100%", maxWidth: 900 }}>
+    <Box>
+      {isLoading && todos.length > 0 && (
+        <Box sx={{ display: "flex", justifyContent: "center", pt: 7 }}>
+          <CircularProgress color="primary" size={40} thickness={4} />
+        </Box>
+      )}
+      <List sx={{ width: "100%" }}>
         {visibleTodos.length > 0 ? (
           visibleTodos.map((todo) => <TodoListItem key={todo.id} todo={todo} />)
         ) : (
-          <Typography variant="h5">
+          <Typography variant="h6">
             there are no{" "}
             {statusFilter === statusFilterConst.all ? "" : statusFilter} todos
           </Typography>

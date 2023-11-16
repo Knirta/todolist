@@ -12,7 +12,14 @@ const TextFilter = () => {
     dispatch(setTextFilter(e.target.value));
   };
 
-  return <TextField value={textFilter} onChange={handleChange} />;
+  return (
+    <TextField
+      value={textFilter}
+      placeholder="text filter..."
+      onChange={handleChange}
+      fullWidth
+    />
+  );
 };
 
 export default TextFilter;
