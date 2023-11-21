@@ -3,20 +3,13 @@ import List from "@mui/material/List";
 import TodoListItem from "../TodoListItem";
 import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
-import { useAppSelector } from "../../hooks/hooks";
-import {
-  selectTodos,
-  selectIsLoading,
-  selectVisibleTodos,
-} from "../../redux/todos/selectors";
-import { selectStatusFilter } from "../../redux/filters/selectors";
+import { useTodos } from "../../hooks/useTodos";
+import { useFilter } from "../../hooks/useFilter";
 import { statusFilterConst } from "../../redux/filters/constants";
 
 const TodoList = () => {
-  const todos = useAppSelector(selectTodos);
-  const isLoading = useAppSelector(selectIsLoading);
-  const statusFilter = useAppSelector(selectStatusFilter);
-  const visibleTodos = useAppSelector(selectVisibleTodos);
+  const { todos, visibleTodos, isLoading } = useTodos();
+  const { statusFilter } = useFilter();
 
   return (
     <Box>
@@ -29,7 +22,7 @@ const TodoList = () => {
         {visibleTodos.length > 0 ? (
           visibleTodos.map((todo) => <TodoListItem key={todo.id} todo={todo} />)
         ) : (
-          <Typography variant="h6">
+          <Typography variant="subtitle1">
             there are no{" "}
             {statusFilter === statusFilterConst.all ? "" : statusFilter} todos
           </Typography>

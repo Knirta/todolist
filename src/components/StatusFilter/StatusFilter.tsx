@@ -1,14 +1,14 @@
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import ToggleButton from "@mui/material/ToggleButton";
-import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
-import { selectStatusFilter } from "../../redux/filters/selectors";
+import { useAppDispatch } from "../../hooks/hooks";
+import { useFilter } from "../../hooks/useFilter";
 import { statusFilterConst } from "../../redux/filters/constants";
 import { setStatusFilter } from "../../redux/filters/slice";
 
 const StatusFilter = () => {
   const dispatch = useAppDispatch();
 
-  const statusFilter = useAppSelector(selectStatusFilter);
+  const { statusFilter } = useFilter();
 
   const handleChange = (_: React.MouseEvent<HTMLElement>, filter: string) => {
     dispatch(setStatusFilter(filter));

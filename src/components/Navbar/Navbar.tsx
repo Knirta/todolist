@@ -8,11 +8,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import NavMenu from "../Navmenu";
 import AuthMenu from "../AuthMenu";
 import UserMenu from "../UserMenu";
-import { useAppSelector } from "../../hooks/hooks";
-import { selectIsLoggedIn } from "../../redux/auth/selectors";
+import { useAuth } from "../../hooks/useAuth";
 
 function ResponsiveAppBar() {
-  const isLoggedIn = useAppSelector(selectIsLoggedIn);
+  const { isLoggedIn } = useAuth();
+
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -57,7 +57,7 @@ function ResponsiveAppBar() {
             open={Boolean(anchorElNav)}
             onClose={handleCloseNavMenu}
             sx={{
-              display: { xs: "block", md: "none" }
+              display: { xs: "block", md: "none" },
             }}
           >
             <NavMenu handleCloseNavMenu={handleCloseNavMenu} />

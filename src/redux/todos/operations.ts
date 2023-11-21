@@ -1,14 +1,22 @@
 import axios, { AxiosError } from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-// axios.defaults.baseURL = "https://62584f320c918296a49543e7.mockapi.io";
-
 export const fetchTodos = createAsyncThunk(
   "todos/fetchAll",
   async (_, thunkAPI) => {
     try {
-      const { data } = await axios.get("/tasks");
-      return data;
+      const tasks = [];
+      let batch = [];
+      let p = 1;
+      do {
+        const { data } = await axios.get(`/tasks?page=${p}`);
+        console.log("data ", data);
+        batch = data;
+        tasks.push(...batch);
+        p += 1;
+      } while (batch.length == 3);
+      console.log("tasks ", tasks);
+      return tasks;
     } catch (error) {
       const err = error as AxiosError;
       return thunkAPI.rejectWithValue(err.message);

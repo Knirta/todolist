@@ -1,18 +1,21 @@
-import { useEffect } from "react";
+import { lazy, useEffect } from "react";
 import Layout from "./Layout";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-import HomePage from "../pages/HomePage";
-import TodosPage from "../pages/TodosPage";
-import RegisterPage from "../pages/RegisterPage";
-import LoginPage from "../pages/LoginPage";
 import { Routes, Route } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../hooks/hooks";
+import { useAppDispatch } from "../hooks/hooks";
 import { fetchCurrentUser } from "../redux/auth/operations";
-import { selectIsRefreshing } from "../redux/auth/selectors";
+import { useAuth } from "../hooks/useAuth";
+import PrivateRoute from "./PrivateRoute";
+import RestrictedRoute from "./RestictedRoute";
+
+const HomePage = lazy(() => import("../pages/HomePage"));
+const TodosPage = lazy(() => import("../pages/TodosPage"));
+const RegisterPage = lazy(() => import("../pages/RegisterPage"));
+const LoginPage = lazy(() => import("../pages/LoginPage"));
 
 const App = () => {
-  const isRefreshing = useAppSelector(selectIsRefreshing);
+  const { isRefreshing } = useAuth();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -27,9 +30,22 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
-        <Route path="/todos" element={<TodosPage />} />
-        <Route path="/signup" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/todos"
+          element={<PrivateRoute component={TodosPage} redirectTo="/login" />}
+        />
+        <Route
+          path="/signup"
+          element={
+            <RestrictedRoute component={RegisterPage} redirectTo="/todos" />
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <RestrictedRoute component={LoginPage} redirectTo="/todos" />
+          }
+        />
       </Route>
     </Routes>
   );

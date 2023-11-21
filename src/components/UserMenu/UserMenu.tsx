@@ -1,15 +1,14 @@
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { useAppSelector } from "../../hooks/hooks";
-import { selectUser } from "../../redux/auth/selectors";
+import { useAuth } from "../../hooks/useAuth";
 import { useAppDispatch } from "../../hooks/hooks";
 import { logOut } from "../../redux/auth/operations";
 
 const UserMenu = () => {
   const dispatch = useAppDispatch();
 
-  const user = useAppSelector(selectUser);
+  const { user } = useAuth();
 
   const handleClick = () => {
     dispatch(logOut());

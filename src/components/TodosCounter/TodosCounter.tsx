@@ -1,10 +1,9 @@
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import { useAppSelector } from "../../hooks/hooks";
-import { selectCount } from "../../redux/todos/selectors";
+import { useTodos } from "../../hooks/useTodos";
 
 const TodosCounter = () => {
-  const count = useAppSelector(selectCount);
+  const { count } = useTodos();
 
   return (
     <Box sx={{ mb: { xs: 2, sm: 0 } }}>

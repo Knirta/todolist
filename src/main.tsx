@@ -15,6 +15,14 @@ const theme = createTheme({
     fontFamily: ["Urbanist Variable", "sans-serif"].join(","),
     fontSize: 22,
   },
+  palette: {
+    primary: {
+      light: "#ECC69F",
+      main: "#E4AE76",
+      dark: "#DD9D63",
+      contrastText: "#fff",
+    },
+  },
   components: {
     MuiAppBar: {
       styleOverrides: {
@@ -24,13 +32,12 @@ const theme = createTheme({
         },
       },
     },
-  },
-  palette: {
-    primary: {
-      light: "#ECC69F",
-      main: "#E4AE76",
-      dark: "#DD9D63",
-      contrastText: "#fff",
+    MuiSnackbarContent: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#DD9D63",
+        },
+      },
     },
   },
 });

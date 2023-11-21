@@ -6,6 +6,7 @@ interface IAuthState {
   token: null | string;
   isLoggedIn: boolean;
   isRefreshing: boolean;
+  error: null | string;
 }
 
 const initialAuthState: IAuthState = {
@@ -13,12 +14,17 @@ const initialAuthState: IAuthState = {
   token: null,
   isLoggedIn: false,
   isRefreshing: false,
+  error: null,
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState: initialAuthState,
-  reducers: {},
+  reducers: {
+    resetError(state) {
+      state.error = null;
+    },
+  },
   extraReducers: (builder) =>
     builder
       .addCase(register.fulfilled, (state, action) => {
@@ -26,10 +32,18 @@ const authSlice = createSlice({
         state.token = action.payload.token;
         state.isLoggedIn = true;
       })
+      .addCase(logIn.pending, (state) => {
+        state.error = null;
+      })
       .addCase(logIn.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
+        state.error = null;
+      })
+      .addCase(logIn.rejected, (state, action) => {
+        state.error = action.payload as string;
+        state.isLoggedIn = false;
       })
       .addCase(logOut.fulfilled, (state) => {
         state.user = { name: null, email: null };
@@ -48,5 +62,7 @@ const authSlice = createSlice({
         state.isRefreshing = false;
       }),
 });
+
+export const { resetError } = authSlice.actions;
 
 export const authReducer = authSlice.reducer;
