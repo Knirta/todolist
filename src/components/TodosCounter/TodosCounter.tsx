@@ -8,7 +8,7 @@ const TodosCounter = () => {
   return (
     <Box sx={{ mb: { xs: 2, sm: 0 } }}>
       <Typography variant="subtitle2" sx={{ lineHeight: 1.2 }}>
-        {count.active} left
+        {count.active} active
       </Typography>
       <Typography variant="subtitle2" sx={{ lineHeight: 1.2 }}>
         {count.completed} completed

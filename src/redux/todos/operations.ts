@@ -10,12 +10,10 @@ export const fetchTodos = createAsyncThunk(
       let p = 1;
       do {
         const { data } = await axios.get(`/tasks?page=${p}`);
-        console.log("data ", data);
         batch = data;
         tasks.push(...batch);
         p += 1;
       } while (batch.length == 3);
-      console.log("tasks ", tasks);
       return tasks;
     } catch (error) {
       const err = error as AxiosError;

@@ -36,13 +36,11 @@ const TodosPage = () => {
           <CircularProgress sx={{ color: "#fff" }} size={80} thickness={5} />
         </Box>
       )}
-      {/* {error && <Typography color="red">error</Typography>} */}
       {todos.length > 0 ? (
         <>
           <Paper elevation={7} sx={{ p: 1 }}>
             <TextFilter />
             <TodoList />
-
             <Box
               sx={{
                 display: { xs: "block", sm: "flex" },
