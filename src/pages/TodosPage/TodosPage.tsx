@@ -4,7 +4,6 @@ import TextFilter from "../../components/TextFilter";
 import StatusFilter from "../../components/StatusFilter";
 import TodoList from "../../components/TodoList";
 import TodosCounter from "../../components/TodosCounter";
-// import ClearCompletedButton from "../../components/ClearCompletedButton";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
