@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 
 const Home = () => {
   return (
-    <Paper sx={{ p: 10, my: 15 }} elevation={7}>
+    <Paper sx={{ p: { xs: 5, sm: 10 }, my: 15 }} elevation={7}>
       <Typography variant="h4" align="center" gutterBottom>
         Why You should have a todo list
       </Typography>

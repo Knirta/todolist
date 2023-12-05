@@ -63,6 +63,7 @@ const TodoListItem = ({ todo: { id, text, completed } }: IProps) => {
         </form>
       ) : (
         <ListItemButton
+          sx={{ px: { xs: 0, sm: 1 } }}
           role={undefined}
           id={id}
           onClick={() => dispatch(toggleCompleted({ id, completed }))}
@@ -71,7 +72,7 @@ const TodoListItem = ({ todo: { id, text, completed } }: IProps) => {
             <Checkbox checked={completed} />
           </ListItemIcon>
 
-          <ListItemText sx={{ pr: 12 }}>
+          <ListItemText sx={{ pr: { xs: 5, sm: 12 } }}>
             <Typography>
               {completed ? <del>{todoText}</del> : todoText}
             </Typography>

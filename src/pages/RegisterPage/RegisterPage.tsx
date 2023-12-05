@@ -29,7 +29,11 @@ const RegisterPage = () => {
   return (
     <Paper
       elevation={7}
-      sx={{ margin: "125px auto 55px", width: "75%", p: "55px" }}
+      sx={{
+        m: "125px auto 55px",
+        width: { md: "75%", lg: "65%" },
+        p: { xs: "10px", sm: "55px" },
+      }}
     >
       <form autoComplete="off" onSubmit={handleSubmit}>
         <div>
@@ -47,7 +51,7 @@ const RegisterPage = () => {
             margin="normal"
           />
         </div>
-        <Button variant="contained" type="submit" sx={{ mt: "25px" }} fullWidth>
+        <Button variant="contained" type="submit" sx={{ my: "25px" }} fullWidth>
           Sign up
         </Button>
       </form>

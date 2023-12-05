@@ -77,7 +77,7 @@ const LoginPage = () => {
       <Paper
         elevation={7}
         sx={{
-          margin: "125px auto 55px",
+          m: "125px auto 55px",
           width: { md: "75%", lg: "65%" },
           p: { xs: "10px", sm: "55px" },
         }}
@@ -98,7 +98,7 @@ const LoginPage = () => {
           <Button
             type="submit"
             variant="contained"
-            sx={{ mt: "25px" }}
+            sx={{ my: "25px" }}
             fullWidth
           >
             Log in
