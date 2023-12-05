@@ -7,7 +7,7 @@ interface Props {
 
 const SimpleContainer = ({ children }: Props) => {
   return (
-    <Container maxWidth="lg" sx={{ pt: 6 }}>
+    <Container maxWidth="md" sx={{ py: 6 }}>
       {children}
     </Container>
   );

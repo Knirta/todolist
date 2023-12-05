@@ -72,7 +72,7 @@ const TodoListItem = ({ todo: { id, text, completed } }: IProps) => {
           </ListItemIcon>
 
           <ListItemText sx={{ pr: 12 }}>
-            <Typography noWrap>
+            <Typography>
               {completed ? <del>{todoText}</del> : todoText}
             </Typography>
           </ListItemText>

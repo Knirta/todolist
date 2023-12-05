@@ -25,7 +25,7 @@ const TodoEditor = () => {
       component="form"
       onSubmit={handleSubmit}
       sx={{
-        display: "flex",
+        display: { xs: "block", sm: "flex" },
         justifyContent: "space-between",
         width: "100%",
         my: 6,
@@ -42,7 +42,12 @@ const TodoEditor = () => {
         placeholder="write todo..."
         onChange={handleChange}
         size="medium"
-        sx={{ flexGrow: 1, mr: 1 }}
+        sx={{
+          flexGrow: 1,
+          mr: { sm: 1 },
+          mb: { xs: 1, sm: 0 },
+          width: { xs: "100%", sm: "auto" },
+        }}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -51,7 +56,12 @@ const TodoEditor = () => {
           ),
         }}
       />
-      <Button type="submit" variant="contained" color="primary" sx={{ px: 9 }}>
+      <Button
+        type="submit"
+        variant="contained"
+        color="primary"
+        sx={{ px: 9, width: { xs: "100%", sm: "auto" } }}
+      >
         Add
       </Button>
     </Box>

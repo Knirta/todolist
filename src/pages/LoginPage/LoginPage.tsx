@@ -76,7 +76,11 @@ const LoginPage = () => {
       />
       <Paper
         elevation={7}
-        sx={{ margin: "125px auto 55px", width: "75%", p: "55px" }}
+        sx={{
+          margin: "125px auto 55px",
+          width: { md: "75%", lg: "65%" },
+          p: { xs: "10px", sm: "55px" },
+        }}
       >
         <form autoComplete="off" onSubmit={handleSubmit}>
           <div>

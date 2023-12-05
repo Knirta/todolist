@@ -13,7 +13,7 @@ import "./index.css";
 const theme = createTheme({
   typography: {
     fontFamily: ["Urbanist Variable", "sans-serif"].join(","),
-    fontSize: 22,
+    fontSize: 16,
   },
   palette: {
     primary: {

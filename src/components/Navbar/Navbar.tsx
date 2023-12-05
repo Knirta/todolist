@@ -24,7 +24,7 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static" sx={{ fontSize: "2rem", py: 2 }}>
+    <AppBar position="static" sx={{ fontSize: "1.6rem", py: 2 }}>
       <Toolbar disableGutters>
         <Box
           sx={{

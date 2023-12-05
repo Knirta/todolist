@@ -14,8 +14,18 @@ const UserMenu = () => {
     dispatch(logOut());
   };
   return (
-    <Box sx={{ display: "flex", alignItems: "center" }}>
-      <Typography variant="inherit" noWrap sx={{ mr: 4, maxWidth: "550px" }}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: { xs: "column", md: "row" },
+        alignItems: "center",
+      }}
+    >
+      <Typography
+        variant="inherit"
+        noWrap
+        sx={{ mr: { md: 4 }, maxWidth: { xs: "200px", md: "550px" } }}
+      >
         Hello, {user.name}!
       </Typography>
       <Button
