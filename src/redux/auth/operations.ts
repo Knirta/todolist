@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
 import { RootState } from "../store";
-
-axios.defaults.baseURL = "https://goit-task-manager.herokuapp.com/";
+axios.defaults.baseURL = "https://task-manager-api.goit.global/";
+// axios.defaults.baseURL = "https://goit-task-manager.herokuapp.com/";
 
 const setAuthHeader = (token: string) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
